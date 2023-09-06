@@ -142,30 +142,3 @@ class Config:
         # "categorical_hinge",
         # "kl_divergence",
     ]
-
-class MhaConfig:
-    EPOCH = [500]         # Number of generations or epoch in neural network and metaheuristics
-    POP_SIZE = [50]     # Number of population size in metaheuristics
-
-    elm = {
-        "para": ["None"]
-    }
-    rbfn = {
-        "epoch": EPOCH,
-        "optimizer": ["adam",],    # https://keras.io/api/optimizers/         "RMSprop", "Adadelta", "SGD",
-        "learning_rate": ["auto"],     # 0.001, 0.01, 0.1, or "auto"
-        "batch_size": [16],
-    }
-    flnn = {
-        "epoch": EPOCH,
-        "optimizer": ["adam",],    # https://keras.io/api/optimizers/         "RMSprop", "Adadelta", "SGD",
-        "learning_rate": ["auto"],     # 0.001, 0.01, 0.1, or "auto"
-        "batch_size": [16],
-    }
-    anfis = {
-        "epoch": EPOCH,
-        "optimizer": ["Adam", "Adadelta", "Adagrad", "SGD", "Adamax", ],    # https://keras.io/api/optimizers/         "RMSprop", "Adadelta", "SGD", "Adam"
-        "learning_rate": [0.0001, 0.00025, 0.0005, 0.001, 0.0025, 0.005,
-                          0.01, 0.025, 0.05, 0.1, 0.15, 0.2],     # 0.001, 0.01, 0.1, or "auto"
-        "batch_size": [8],
-    }
