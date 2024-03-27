@@ -42,10 +42,16 @@ class Const:
     Y_VALID_PRED_PROB = "y_valid_pred_prob"
 
     FILENAME_LOSS_TRAIN = "loss_train"
-    FILENAME_PRED_TRAIN = "pred_train"
-    FILENAME_PRED_VALID = "pred_valid"
-    FILENAME_PRED_TEST = "pred_test"
-    FILENAME_PRED_REAL_WORLD = "pred_real_world"
+    
+    FILENAME_PRED_TRAIN_CLS = "pred_train_cls"
+    FILENAME_PRED_VALID_CLS = "pred_valid_cls"
+    FILENAME_PRED_TEST_CLS = "pred_test_cls"
+    FILENAME_PRED_REAL_WORLD_CLS = "pred_real_world_cls"
+
+    FILENAME_PRED_TRAIN_REG = "pred_train_reg"
+    FILENAME_PRED_VALID_REG = "pred_valid_reg"
+    FILENAME_PRED_TEST_REG = "pred_test_reg"
+    FILENAME_PRED_REAL_WORLD_REG = "pred_real_world_reg"
 
     FILENAME_IMG_CM_TRAIN = "confusion_matrix_train"
     FILENAME_IMG_CM_VALID = "confusion_matrix_valid"
@@ -53,9 +59,10 @@ class Const:
 
     FILENAME_IMG_LOSS_ACC = "loss-accuracy"
     FILENAME_IMG_ROC_AUC = "roc_curve"
-    FILENAME_IMG_PRE_RECALL = "precision_recall_curve"
 
+    FILENAME_IMG_PRE_RECALL = "precision_recall_curve"
     FILENAME_CONVERGENCE = "convergence"
+
     FILENAME_PERFORMANCE = "performance"
     FILENAME_METRICS = "metrics"
     FILENAME_MODEL = "model"
@@ -93,7 +100,10 @@ class Const:
 class Config:
     DATA_DIRECTORY = f'{basedir}/data'
     DATA_INPUT = f'{DATA_DIRECTORY}/input_data'
-    DATA_RESULTS = f'{DATA_DIRECTORY}/results_anfis_cv'
+    DATA_RESULTS = f'{DATA_DIRECTORY}/results_01'
+
+    DATA_RESULTS_RF = f'{DATA_DIRECTORY}/results_rf'
+    DATA_RESULTS_DT = f'{DATA_DIRECTORY}/results_dt'
 
     FILE_METRIC_NAME = "metrics-results"
     FILE_METRIC_CSV_HEADER = ["model_paras", ] + FILE_METRIC_CSV
@@ -129,7 +139,8 @@ class Config:
     VALID_SIZE = 0.2
     VALIDATION_USED = VALIDATION_USED
 
-    METRICS_FOR_TESTING_PHASE = ["AS", "PS", "RS", "F1S", "F2S", "MCC", "LS"]
+    METRICS_CLS_FOR_TESTING = ["AS", "PS", "RS", "F1S", "F2S", "MCC", "LS"]
+    METRICS_REG_FOR_TESTING = ["RMSE", "MAE", "NSE", "KGE", "R2", "MAPE"]
     ## Training objective function
     OBJ_FUNCS = [  # Metric for training phase in network
         ## Binary-class
