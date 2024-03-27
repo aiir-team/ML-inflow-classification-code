@@ -14,7 +14,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn import svm
 from config import Config, Const
 from utils.data_util import split_dataset, split_smote_dataset
-from utils.result_util import save_results
+from utils.result_util import save_classification_results
 import warnings
 
 
@@ -156,7 +156,7 @@ for key_feature, features in dict_features.items():
                 Const.Y_TRAIN_PRED_PROB: grid.predict_proba(x_train),
                 Const.Y_TEST_PRED_PROB: grid.predict_proba(x_test),
             }
-            save_results(results=results, validation=Config.VALIDATION_USED, metrics_head=mm0, metrics_file="metrics-results",
+            save_classification_results(results=results, validation=Config.VALIDATION_USED, metrics_head=mm0, metrics_file="metrics-results",
                          test_filename=f"{key_feature}-{model['name']}",
                          pathsave=f"{Config.DATA_RESULTS}/{data_handling}",
                          name_labels=lb_encoder.classes_, name_model=model['name'], n_labels=len(lb_encoder.classes_),

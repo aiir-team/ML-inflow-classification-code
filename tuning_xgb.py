@@ -38,7 +38,7 @@ for idx, features in enumerate(list_all_features):
         "best_estimator": "XGB"
     }
     predicted = model.predict(x_test)
-    evaluator = ClassificationMetric(y_test, predicted, decimal=4)
+    evaluator = ClassificationMetric(y_test, predicted)
     metrics = ["AS", "PS", "RS", "F1S", "F2S", "MCC", "LS"]
     paras = [{"average": "micro"}, ] * len(metrics)
     mm2 = evaluator.get_metrics_by_list_names(metrics, paras)

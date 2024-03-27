@@ -34,7 +34,7 @@ for idx, features in enumerate(list_all_features):
     }
     y_test_pred = model.predict(x_test)
     y_train_pred = model.predict(x_train)
-    mm1 = my_classify_metrics(y_train, y_train_pred, None, prefix="train", decimal=4)
-    mm2 = my_classify_metrics(y_test, y_test_pred, None, prefix="test", decimal=4)
+    mm1 = my_classify_metrics(y_train, y_train_pred, None, prefix="train")
+    mm2 = my_classify_metrics(y_test, y_test_pred, None, prefix="test")
     mm = {**mm0, **mm1, **mm2}
     save_results_to_csv(mm, f"smote-xgb-tuning-results_mean_threshold", "data/history")
