@@ -11,6 +11,7 @@ import numpy as np
 from config import Config, Const
 from utils.io_util import load_dataset
 from imblearn.over_sampling import SMOTE
+import pandas as pd
 
 
 class MiniBatch:
@@ -192,3 +193,72 @@ def split_smote_dataset(dataset, input_x, output_y='label+1', scaler="std"):
     return x_smote, x_test, y_smote, y_test, scaler, lb_encoder
 
 
+def split_dataset_regression(X, y, scaler="std"):
+    idx = int(len(X) * (1 - Config.VALID_SIZE))
+    x_train, x_test, y_train, y_test = X[:idx], X[idx:], y[:idx], y[idx:]
+    # x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=Config.VALID_SIZE, random_state=Config.SEED, shuffle=False)
+    if scaler == "std":
+        scaler_X = StandardScaler()
+        scaler_X.fit(x_train)
+        scaler_y = StandardScaler()
+        scaler_y.fit(y_train.reshape(-1, 1))
+    else:
+        scaler_X = MinMaxScaler()
+        scaler_X.fit(x_train)
+        scaler_y = MinMaxScaler()
+        scaler_y.fit(y_train.reshape(-1, 1))
+    x_train = scaler_X.transform(x_train)
+    x_test = scaler_X.transform(x_test)
+    y_train = scaler_y.transform(y_train.reshape(-1, 1))
+    y_test = scaler_y.transform(y_test.reshape(-1, 1))
+    return x_train, x_test, y_train, y_test, scaler_X, scaler_y, idx
+
+
+def convert_to_classification(y=None, month=None, matrix="mean"):
+    month = np.asarray(month, dtype=int)
+    if matrix == "mean":
+        matrix_value = np.array([
+            [1.90, 2.50, 3.15, 4.15],
+            [0.80, 1.35, 1.95, 3.00],
+            [0.55, 1.05, 1.70, 2.80],
+            [0.30, 0.65, 1.15, 2.10],
+            [0.65, 0.95, 1.35, 2.05],
+            [0.90, 1.25, 1.65, 2.35],
+            [2.80, 3.70, 4.75, 6.55],
+            [15.05, 17.60, 20.40, 24.75],
+            [18.55, 21.20, 24.05, 28.35],
+            [11.30, 13.35, 15.60, 19.05],
+            [4.75, 5.95, 7.30, 9.50],
+            [2.70, 3.45, 4.30, 5.65]
+        ])
+    else:
+        matrix_value = np.array([
+            [1.6, 2.5, 4.15, 4.8],
+            [0.5, 1.35, 3.0, 3.7],
+            [0.3, 1.05, 2.8, 3.5],
+            [0.1, 0.65, 1.15, 2.1],
+            [0.5, 0.95, 2.05, 2.5],
+            [0.7, 1.25, 2.35, 2.8],
+            [2.3, 3.7, 6.55, 7.7],
+            [13.7, 17.6, 24.75, 27.5],
+            [17.1, 21.2, 28.35, 31.0],
+            [10.2, 13.35, 19.05, 21.2],
+            [4.1, 5.95, 9.5, 10.9],
+            [2.3, 3.45, 5.65, 6.5]
+        ])
+    y1 = []
+    for idx in range(len(y)):
+        thesh = matrix_value[month[idx] - 1, :]
+        x = y[idx]
+        if x < thesh[0]:
+            temp = "Low"
+        elif thesh[0] <= x < thesh[1]:
+            temp = "Medium Low"
+        elif thesh[1] <= x < thesh[2]:
+            temp = "Medium"
+        elif thesh[2] <= x < thesh[3]:
+            temp = "Medium High"
+        else:
+            temp = "High"
+        y1.append(temp)
+    return np.array(y1)

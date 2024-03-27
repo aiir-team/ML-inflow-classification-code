@@ -44,7 +44,7 @@ def draw_predict_line_with_error(data: list, error: list, filename: str, pathsav
 
     ax2 = my_fig.add_subplot(gs[1:, 3:])
     sns.regplot(x="y_true", y="y_pred", data=df, ax=ax2)
-    ax2.set(xlabel=r'Observed', ylabel=r'Predicted', title='Linear Relationship: MAE=' + str(error[0]))
+    ax2.set(xlabel=r'Observed', ylabel=r'Predicted', title='Linear Relationship: R2=' + str(error[0]))
     # ax2.set(xlabel=r'Observed ($m^3/s$)', ylabel=r'Predicted ($m^3/s$)')
     ax2.legend(['Fit'])
 
