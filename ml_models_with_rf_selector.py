@@ -24,7 +24,7 @@ from config import Config, Const
 
 def get_feature_by_RF_selector(X=None, y=None):
     # Train Random Forest
-    regressor = RandomForestRegressor(n_estimators=100, random_state=42)
+    regressor = RandomForestRegressor(n_estimators=25, random_state=42)
     regressor.fit(X, y)
 
     # Feature Importance
@@ -38,7 +38,7 @@ def get_feature_by_RF_selector(X=None, y=None):
 
     # Select features based on importance
     sfm = SelectFromModel(regressor, threshold=0.01)  # Adjust threshold as needed
-    sfm.fit(X, y[:,0])
+    sfm.fit(X, y)
     X_new = sfm.transform(X)
     return X_new
 
@@ -48,7 +48,8 @@ X = data[['value-1', 'value-2', 'value-3', 'value-4', 'value-5', 'value-6', 'val
           'value-8', 'value-9', 'value-10', 'value-11', 'value-12']].values
 y = data[["value", "month"]].values
 
-X_new = get_feature_by_RF_selector(X, y)
+X_new = get_feature_by_RF_selector(X, y[:,0])
+
 
 ## Split train and test
 x_train, x_test, y_train, y_test, scaler_X, scaler_y, index_test = split_dataset_regression(X_new, y[:,0], scaler="std")

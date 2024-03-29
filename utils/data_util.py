@@ -193,6 +193,30 @@ def split_smote_dataset(dataset, input_x, output_y='label+1', scaler="std"):
     return x_smote, x_test, y_smote, y_test, scaler, lb_encoder
 
 
+def divide_dataset_regression(X, y, test_size=0.2):
+    idx = int(len(X) * (1 - test_size))
+    x_train, x_test, y_train, y_test = X[:idx], X[idx:], y[:idx], y[idx:]
+    return x_train, x_test, y_train, y_test, idx
+
+
+def scale_dataset_regression(X_train, X_test, y_train, y_test, scaler="std"):
+    if scaler == "std":
+        scaler_X = StandardScaler()
+        scaler_X.fit(X_train)
+        scaler_y = StandardScaler()
+        scaler_y.fit(y_train.reshape(-1, 1))
+    else:
+        scaler_X = MinMaxScaler()
+        scaler_X.fit(X_train)
+        scaler_y = MinMaxScaler()
+        scaler_y.fit(y_train.reshape(-1, 1))
+    x_train = scaler_X.transform(X_train)
+    x_test = scaler_X.transform(X_test)
+    y_train = scaler_y.transform(y_train.reshape(-1, 1))
+    y_test = scaler_y.transform(y_test.reshape(-1, 1))
+    return x_train, x_test, y_train, y_test, scaler_X, scaler_y
+
+
 def split_dataset_regression(X, y, scaler="std"):
     idx = int(len(X) * (1 - Config.VALID_SIZE))
     x_train, x_test, y_train, y_test = X[:idx], X[idx:], y[:idx], y[idx:]

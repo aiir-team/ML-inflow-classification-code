@@ -104,6 +104,7 @@ class Config:
 
     DATA_RESULTS_RF = f'{DATA_DIRECTORY}/results_rf'
     DATA_RESULTS_DT = f'{DATA_DIRECTORY}/results_dt'
+    DATA_RESULTS_ALL = f'{DATA_DIRECTORY}/results_all'
 
     FILE_METRIC_NAME = "metrics-results"
     FILE_METRIC_CSV_HEADER = ["model_paras", ] + FILE_METRIC_CSV
