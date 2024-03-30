@@ -7,7 +7,6 @@
 from pathlib import Path
 from pandas import read_csv, Series
 import numpy as np
-from keras.models import load_model as keras_load_model
 import pickle
 
 
@@ -38,12 +37,6 @@ def save_system(system, pathfile=None, framework="keras", hybrid_model=True):
 
 def load_system(pathfile=None, framework="keras"):
     system = pickle.load(open(f"{pathfile}.pkl", 'rb'))
-    if framework == "keras":
-        model = keras_load_model(f"{pathfile}.h5", compile=False)
-        system.model = model
-    elif framework == "tf":
-        model = keras_load_model(pathfile, compile=False)
-        system.model = model
     return system
 
 

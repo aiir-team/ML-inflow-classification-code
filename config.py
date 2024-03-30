@@ -104,7 +104,7 @@ class Config:
 
     DATA_RESULTS_RF = f'{DATA_DIRECTORY}/results_rf'
     DATA_RESULTS_DT = f'{DATA_DIRECTORY}/results_dt'
-    DATA_RESULTS_ALL = f'{DATA_DIRECTORY}/results_all'
+    DATA_RESULTS_ALL = f'{DATA_DIRECTORY}/results_final'
 
     FILE_METRIC_NAME = "metrics-results"
     FILE_METRIC_CSV_HEADER = ["model_paras", ] + FILE_METRIC_CSV
@@ -124,6 +124,7 @@ class Config:
     SEED = 20
     VERBOSE = False
     N_TRIALS = 10                # Number of trials for each model
+    FS_THRESHOLD = 0.2
 
     # Identify feature and response variable(s) and values must be numeric and numpy arrays
     NAME_DATASET = "data/input_data/inflow_by_mean.csv"

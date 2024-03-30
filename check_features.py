@@ -31,21 +31,25 @@ y = data[["value", "month"]].values
 x_train, x_test, y_train, y_test, index_test = divide_dataset_regression(X, y[:,0], test_size=Config.TEST_SIZE)
 
 ## Select features
-selected_features_idx, selected_features_score = select_features(x_train, y_train, mi_weight=0.33, anova_weight=0, dt_weight=0, rf_weight=0.33, svm_weight=0.33)
-print(selected_features_idx)
-print(selected_features_score)
-
-
 selected_features_idx, selected_features_score = select_features(x_train, y_train, mi_weight=1, anova_weight=0, dt_weight=0, rf_weight=0, svm_weight=0)
 print(selected_features_idx)
 print(selected_features_score)
+print(selected_features_idx[selected_features_score>Config.FS_THRESHOLD])
 
 
 selected_features_idx, selected_features_score = select_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=1, svm_weight=0)
 print(selected_features_idx)
 print(selected_features_score)
+print(selected_features_idx[selected_features_score>Config.FS_THRESHOLD])
 
 
 selected_features_idx, selected_features_score = select_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=0, svm_weight=1)
 print(selected_features_idx)
 print(selected_features_score)
+print(selected_features_idx[selected_features_score>Config.FS_THRESHOLD])
+
+
+selected_features_idx, selected_features_score = select_features(x_train, y_train, mi_weight=0.33, anova_weight=0, dt_weight=0, rf_weight=0.33, svm_weight=0.33)
+print(selected_features_idx)
+print(selected_features_score)
+print(selected_features_idx[selected_features_score>Config.FS_THRESHOLD])
