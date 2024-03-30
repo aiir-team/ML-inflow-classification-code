@@ -34,19 +34,19 @@ x_train, x_test, y_train, y_test, index_test = divide_dataset_regression(X, y[:,
 selected_features_idx, selected_features_score = select_features(x_train, y_train, mi_weight=0.2, anova_weight=0.2, dt_weight=0.2, rf_weight=0.2, svm_weight=0.2)
 X_train = x_train[:, selected_features_idx[:5]]
 X_test = x_test[:, selected_features_idx[:5]]
-
-## Scale dataset
-X_train_scaled, X_test_scaled, y_train_scaled, y_test_scaled, scaler_X, scaler_y = scale_dataset_regression(X_train, X_test, y_train, y_test, scaler="std")
 print(selected_features_idx)
 print(selected_features_score)
 
+## Scale dataset
+X_train_scaled, X_test_scaled, y_train_scaled, y_test_scaled, scaler_X, scaler_y = scale_dataset_regression(X_train, X_test, y_train, y_test, scaler="std")
 
 ## Build models
 list_models = [
     {
         "name": "RF",
         "model": RandomForestRegressor(),
-        "param_grid": {'n_estimators': [10, 20, 30, 40, 50]}
+        "param_grid": {'n_estimators': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                       'criterion': {"squared_error", "absolute_error", "poisson"}}
     }, {
         "name": "SVM",
         "model": SVR(),
@@ -60,7 +60,7 @@ list_models = [
     }, {
         "name": "KNN",
         "model": KNeighborsRegressor(),
-        "param_grid": {'n_neighbors': [5, 10, 15, 20, 25]}
+        "param_grid": {'n_neighbors': [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]}
     }, {
         "name": "DT",
         "model": DecisionTreeRegressor(),
@@ -68,7 +68,7 @@ list_models = [
     }, {
         "name": "AdaBoost",
         "model": AdaBoostRegressor(),
-        "param_grid": {'n_estimators': [10, 20, 30, 40, 50],
+        "param_grid": {'n_estimators': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
                        'loss': ['linear', 'square', 'exponential']}
     }, {
         "name": "MLP",
