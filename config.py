@@ -104,7 +104,7 @@ class Config:
 
     DATA_RESULTS_RF = f'{DATA_DIRECTORY}/results_rf'
     DATA_RESULTS_DT = f'{DATA_DIRECTORY}/results_dt'
-    DATA_RESULTS_ALL = f'{DATA_DIRECTORY}/results_final'
+    DATA_RESULTS_ALL = f'{DATA_DIRECTORY}/results_final_02'
 
     FILE_METRIC_NAME = "metrics-results"
     FILE_METRIC_CSV_HEADER = ["model_paras", ] + FILE_METRIC_CSV
@@ -141,7 +141,7 @@ class Config:
     VALID_SIZE = 0.2
     VALIDATION_USED = VALIDATION_USED
 
-    METRICS_CLS_FOR_TESTING = ["AS", "PS", "RS", "F1S", "F2S", "MCC", "LS"]
+    METRICS_CLS_FOR_TESTING = ["AS", "PS", "RS", "F1S", "F2S", "NPV", "SS", "ROC", "GMS"]
     METRICS_REG_FOR_TESTING = ["RMSE", "MAE", "NSE", "KGE", "R2", "MAPE"]
     ## Training objective function
     OBJ_FUNCS = [  # Metric for training phase in network
@@ -155,3 +155,70 @@ class Config:
         # "categorical_hinge",
         # "kl_divergence",
     ]
+
+    MI_RF_GRID = {'n_estimators': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                       'criterion': ["squared_error", "absolute_error"]}
+    MI_SVM_GRID = {'C': [0.1, 1., 5., 10., 15.],
+                  'gamma': ['scale', 'auto'],
+                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
+    MI_LR_GRID = {'fit_intercept': [True, False]}
+    MI_KNN_GRID = {'n_neighbors': [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]}
+    MI_DT_GRID = {'criterion': ["squared_error", "absolute_error"]}
+    MI_AdaBoost_GRID = {'n_estimators': [75, 100, 125, 150, 175, 200, 225, 250, 275, 300],
+                       'loss': ['linear', 'square', 'exponential']}
+    MI_MLP_GRID = {'hidden_layer_sizes': list(range(5, 21, 1)),
+                       'activation': ['logistic', 'tanh', 'relu'],
+                       'solver': ['lbfgs', 'sgd', 'adam'],
+                       'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
+                       'max_iter': list(range(700, 1500, 100))}
+
+
+    SVM_RF_GRID = {'n_estimators': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                       'criterion': ["squared_error", "absolute_error"]}
+    SVM_SVM_GRID = {'C': [0.1, 1., 5., 10., 15.],
+                  'gamma': ['scale', 'auto'],
+                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
+    SVM_LR_GRID = {'fit_intercept': [True, False]}
+    SVM_KNN_GRID = {'n_neighbors': [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]}
+    SVM_DT_GRID = {'criterion': ["squared_error", "absolute_error"]}
+    SVM_AdaBoost_GRID = {'n_estimators': [50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+                       'loss': ['linear', 'square', 'exponential']}
+    SVM_MLP_GRID = {'hidden_layer_sizes': list(range(7, 26, 1)),
+                       'activation': ['logistic', 'tanh', 'relu'],
+                       'solver': ['lbfgs', 'sgd', 'adam'],
+                       'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
+                       'max_iter': list(range(700, 1500, 100))}
+
+
+    RF_RF_GRID = {'n_estimators': [5, 10, 15, 20, 25, 30, 35, 40, 45, 50],
+                       'criterion': ["squared_error", "absolute_error"]}
+    RF_SVM_GRID = {'C': [0.01, 0.05, 0.1, 0.25, 0.5, 1.0, 1.5],
+                  'gamma': ['scale', 'auto'],
+                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
+    RF_LR_GRID = {'fit_intercept': [True, False]}
+    RF_KNN_GRID = {'n_neighbors': list(range(3, 26))}
+    RF_DT_GRID = {'criterion': ["squared_error", "absolute_error"]}
+    RF_AdaBoost_GRID = {'n_estimators': list(range(30, 210, 10)),
+                       'loss': ['linear', 'square', 'exponential']}
+    RF_MLP_GRID = {'hidden_layer_sizes': list(range(3, 16, 1)),
+                       'activation': ['logistic', 'tanh', 'relu'],
+                       'solver': ['lbfgs', 'sgd', 'adam'],
+                       'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
+                       'max_iter': list(range(700, 1500, 100))}
+
+
+    MCFS_RF_GRID = {'n_estimators': list(range(10, 210, 10)),
+                       'criterion': ["squared_error", "absolute_error"]}
+    MCFS_SVM_GRID = {'C': [0.1, 0.5, 1.0, 1.5, 2.0, 5.0, 10.0],
+                  'gamma': ['scale', 'auto'],
+                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
+    MCFS_LR_GRID = {'fit_intercept': [True, False]}
+    MCFS_KNN_GRID = {'n_neighbors': list(range(5, 26, 1))}
+    MCFS_DT_GRID = {'criterion': ["squared_error", "absolute_error"]}
+    MCFS_AdaBoost_GRID = {'n_estimators': list(range(30, 210, 10)),
+                       'loss': ['linear', 'square', 'exponential']}
+    MCFS_MLP_GRID = {'hidden_layer_sizes': list(range(4, 26, 1)),
+                       'activation': ['logistic', 'tanh', 'relu'],
+                       'solver': ['lbfgs', 'sgd', 'adam'],
+                       'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
+                       'max_iter': list(range(700, 1500, 100))}

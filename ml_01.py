@@ -45,40 +45,32 @@ X_train_scaled, X_test_scaled, y_train_scaled, y_test_scaled, scaler_X, scaler_y
 list_models = [
     {
         "name": "RF",
-        "model": RandomForestRegressor(),
-        "param_grid": {'n_estimators': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                       'criterion': ["squared_error", "absolute_error"]}
+        "model": RandomForestRegressor(random_state=Config.SEED),
+        "param_grid": Config.MI_RF_GRID
     }, {
         "name": "SVM",
         "model": SVR(),
-        "param_grid": {'C': [0.1, 1., 5., 10., 15.],
-                  'gamma': ['scale', 'auto'],
-                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
+        "param_grid": Config.MI_SVM_GRID
     }, {
         "name": "LR",
         "model": LinearRegression(),
-        "param_grid": {'fit_intercept': [True, False]}
+        "param_grid": Config.MI_LR_GRID
     }, {
         "name": "KNN",
         "model": KNeighborsRegressor(),
-        "param_grid": {'n_neighbors': [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]}
+        "param_grid": Config.MI_KNN_GRID
     }, {
         "name": "DT",
-        "model": DecisionTreeRegressor(),
-        "param_grid": {'criterion': ["squared_error", "absolute_error"]}
+        "model": DecisionTreeRegressor(random_state=Config.SEED),
+        "param_grid": Config.MI_DT_GRID
     }, {
         "name": "AdaBoost",
-        "model": AdaBoostRegressor(),
-        "param_grid": {'n_estimators': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                       'loss': ['linear', 'square', 'exponential']}
+        "model": AdaBoostRegressor(random_state=Config.SEED),
+        "param_grid": Config.MI_AdaBoost_GRID
     }, {
         "name": "MLP",
-        "model": MLPRegressor(),
-        "param_grid": {'hidden_layer_sizes': list(range(5, 55, 5)),
-                       'activation': ['logistic', 'tanh', 'relu'],
-                       'solver': ['lbfgs', 'sgd', 'adam'],
-                       'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
-                       'max_iter': list(range(1000, 2100, 100))}
+        "model": MLPRegressor(random_state=Config.SEED),
+        "param_grid": Config.MI_MLP_GRID
     }
 ]
 

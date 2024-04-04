@@ -31,8 +31,8 @@ y = data[["value", "month"]].values
 x_train, x_test, y_train, y_test, index_test = divide_dataset_regression(X, y[:,0], test_size=Config.TEST_SIZE)
 
 ## Select features
-key_features = "RFSelector"
-selected_features_idx, selected_features_score = select_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=1, svm_weight=0)
+key_features = "SVMSelector"
+selected_features_idx, selected_features_score = select_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=0, svm_weight=1)
 X_train = x_train[:, selected_features_idx[selected_features_score>Config.FS_THRESHOLD]]
 X_test = x_test[:, selected_features_idx[selected_features_score>Config.FS_THRESHOLD]]
 print(selected_features_idx)
@@ -45,42 +45,35 @@ X_train_scaled, X_test_scaled, y_train_scaled, y_test_scaled, scaler_X, scaler_y
 list_models = [
     {
         "name": "RF",
-        "model": RandomForestRegressor(),
-        "param_grid": {'n_estimators': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                       'criterion': ["squared_error", "absolute_error"]}
+        "model": RandomForestRegressor(random_state=Config.SEED),
+        "param_grid": Config.SVM_RF_GRID
     }, {
         "name": "SVM",
         "model": SVR(),
-        "param_grid": {'C': [0.1, 1., 5., 10., 15.],
-                  'gamma': ['scale', 'auto'],
-                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
+        "param_grid": Config.SVM_SVM_GRID
     }, {
         "name": "LR",
         "model": LinearRegression(),
-        "param_grid": {'fit_intercept': [True, False]}
+        "param_grid": Config.SVM_LR_GRID
     }, {
         "name": "KNN",
         "model": KNeighborsRegressor(),
-        "param_grid": {'n_neighbors': [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]}
+        "param_grid": Config.SVM_KNN_GRID
     }, {
         "name": "DT",
-        "model": DecisionTreeRegressor(),
-        "param_grid": {'criterion': ["squared_error", "absolute_error"]}
+        "model": DecisionTreeRegressor(random_state=Config.SEED),
+        "param_grid": Config.SVM_DT_GRID
     }, {
         "name": "AdaBoost",
-        "model": AdaBoostRegressor(),
-        "param_grid": {'n_estimators': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                       'loss': ['linear', 'square', 'exponential']}
+        "model": AdaBoostRegressor(random_state=Config.SEED),
+        "param_grid": Config.SVM_AdaBoost_GRID
     }, {
         "name": "MLP",
-        "model": MLPRegressor(),
-        "param_grid": {'hidden_layer_sizes': list(range(5, 55, 5)),
-                       'activation': ['logistic', 'tanh', 'relu'],
-                       'solver': ['lbfgs', 'sgd', 'adam'],
-                       'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
-                       'max_iter': list(range(1000, 2100, 100))}
+        "model": MLPRegressor(random_state=Config.SEED),
+        "param_grid": Config.SVM_MLP_GRID
     }
 ]
+
 
 for idx_model, model in enumerate(list_models):
     grid = GridSearchCV(model['model'], model['param_grid'], refit=True, verbose=0, n_jobs=8, scoring="neg_mean_squared_error")
