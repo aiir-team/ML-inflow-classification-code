@@ -19,7 +19,7 @@ from sklearn.preprocessing import LabelEncoder
 from utils.data_util import convert_to_classification, divide_dataset_regression, scale_dataset_regression
 from utils.result_util import save_classification_results, save_regression_results
 from config import Config, Const
-from utils.feature_util import select_features
+from utils.feature_util import select_reg_features
 
 
 data = pd.read_csv("data/input_data/inflow_by_mean.csv")
@@ -31,7 +31,7 @@ y = data[["value", "month"]].values
 x_train, x_test, y_train, y_test, index_test = divide_dataset_regression(X, y[:,0], test_size=Config.TEST_SIZE)
 
 ## Select features
-selected_features_idx, selected_features_score = select_features(x_train, y_train, mi_weight=0.2, anova_weight=0.2, dt_weight=0.2, rf_weight=0.2, svm_weight=0.2)
+selected_features_idx, selected_features_score = select_reg_features(x_train, y_train, mi_weight=0.2, anova_weight=0.2, dt_weight=0.2, rf_weight=0.2, svm_weight=0.2)
 X_train = x_train[:, selected_features_idx[:5]]
 X_test = x_test[:, selected_features_idx[:5]]
 print(selected_features_idx)

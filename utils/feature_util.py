@@ -12,7 +12,7 @@ import numpy as np
 # from sklearn.datasets import load_boston
 
 
-def select_features(X, y, mi_weight=0.2, anova_weight=0.2, dt_weight=0.2, rf_weight=0.2, svm_weight=0.2):
+def select_reg_features(X, y, mi_weight=0.2, anova_weight=0.2, dt_weight=0.2, rf_weight=0.2, svm_weight=0.2):
     # Calculate mutual information
     mi_scores = mutual_info_regression(X, y)
     # Perform ANOVA test and get F-values
@@ -71,7 +71,7 @@ def select_features(X, y, mi_weight=0.2, anova_weight=0.2, dt_weight=0.2, rf_wei
 # X = data.data
 # y = data.target
 #
-# # selected_features = select_features(X, y, mi_weight=0.2, anova_weight=0.2, dt_weight=0.2, rf_weight=0.2, svm_weight=0.2)
+# # selected_features = select_reg_features(X, y, mi_weight=0.2, anova_weight=0.2, dt_weight=0.2, rf_weight=0.2, svm_weight=0.2)
 # # # Print the selected features
 # # print("Selected Features:")
 # # for i, (feature_idx, score) in enumerate(selected_features, start=1):
@@ -79,7 +79,7 @@ def select_features(X, y, mi_weight=0.2, anova_weight=0.2, dt_weight=0.2, rf_wei
 # #     print(f"{i}. {feature_name}: Combined Score = {score:.4f}")
 #
 #
-# selected_features_indices, selected_scores = select_features(X, y, mi_weight=0.2, anova_weight=0.2, dt_weight=0.2, rf_weight=0.2, svm_weight=0.2)
+# selected_features_indices, selected_scores = select_reg_features(X, y, mi_weight=0.2, anova_weight=0.2, dt_weight=0.2, rf_weight=0.2, svm_weight=0.2)
 #
 # # Print the selected features
 # print("Selected Features:")

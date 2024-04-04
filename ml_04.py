@@ -19,7 +19,7 @@ from sklearn.preprocessing import LabelEncoder
 from utils.data_util import convert_to_classification, divide_dataset_regression, scale_dataset_regression
 from utils.result_util import save_classification_results, save_regression_results
 from config import Config, Const
-from utils.feature_util import select_features
+from utils.feature_util import select_reg_features
 
 
 data = pd.read_csv("data/input_data/inflow_by_mean.csv")
@@ -32,7 +32,7 @@ x_train, x_test, y_train, y_test, index_test = divide_dataset_regression(X, y[:,
 
 ## Select features
 key_features = "MCFSSelectors"
-selected_features_idx, selected_features_score = select_features(x_train, y_train, mi_weight=0.33, anova_weight=0, dt_weight=0, rf_weight=0.33, svm_weight=0.33)
+selected_features_idx, selected_features_score = select_reg_features(x_train, y_train, mi_weight=0.33, anova_weight=0, dt_weight=0, rf_weight=0.33, svm_weight=0.33)
 X_train = x_train[:, selected_features_idx[selected_features_score>Config.FS_THRESHOLD]]
 X_test = x_test[:, selected_features_idx[selected_features_score>Config.FS_THRESHOLD]]
 print(selected_features_idx)
