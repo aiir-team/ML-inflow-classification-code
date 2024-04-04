@@ -221,7 +221,7 @@ def scale_dataset_regression(X_train, X_test, y_train, y_test, scaler="std"):
     return x_train, x_test, y_train, y_test, scaler_X, scaler_y
 
 
-def scale_dataset_classification(X_train, X_test, y_train, y_test, scaler="std"):
+def scale_dataset_classification(X_train, X_test, y_train, y_test, scaler="std", fix_imbalanced=False):
     if scaler == "std":
         scaler_X = StandardScaler()
         scaler_X.fit(X_train)
@@ -230,6 +230,9 @@ def scale_dataset_classification(X_train, X_test, y_train, y_test, scaler="std")
         scaler_X.fit(X_train)
     x_train = scaler_X.transform(X_train)
     x_test = scaler_X.transform(X_test)
+    if fix_imbalanced:
+        smote = SMOTE(random_state=Config.SEED)
+        x_train, y_train = smote.fit_resample(x_train, y_train)
     return x_train, x_test, y_train, y_test, scaler_X, None
 
 
