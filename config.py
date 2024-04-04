@@ -106,6 +106,8 @@ class Config:
     DATA_RESULTS_DT = f'{DATA_DIRECTORY}/results_dt'
     DATA_RESULTS_ALL = f'{DATA_DIRECTORY}/results_final_02'
 
+    DATA_RESULTS_CLS = f'{DATA_DIRECTORY}/results_cls_final'
+
     FILE_METRIC_NAME = "metrics-results"
     FILE_METRIC_CSV_HEADER = ["model_paras", ] + FILE_METRIC_CSV
     FILE_METRIC_CSV_HEADER_FULL = ["path_paras", "trial", "model", "model_paras", ] + FILE_METRIC_CSV
@@ -223,3 +225,83 @@ class Config:
                        'solver': ['lbfgs', 'sgd', 'adam'],
                        'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
                        'max_iter': list(range(700, 1500, 100))}
+
+    # =========================================================== Classification dataset==========================
+    MI_RF_GRID_CLS = {'n_estimators': list(range(20, 220, 20)),
+                       'criterion': ["gini", "entropy"]}
+    MI_SVM_GRID_CLS = {'C': [0.1, 0.5, 1.0, 10.0, 100.0],
+                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']}
+    MI_LR_GRID_CLS = {'C': [0.01, 0.1, 1.0, 10, 100],
+                       'max_iter': list(range(700, 1600, 100))}
+    MI_KNN_GRID_CLS = {'n_neighbors': list(range(5, 30, 1)),
+                       'weights': ['uniform', 'distance']}
+    MI_DT_GRID_CLS = {'criterion': ["gini", "entropy", "log_loss"],
+                       'splitter': ['best', 'random'],
+                       'max_features': {"auto", "sqrt", "log2"}}
+    MI_AdaBoost_GRID_CLS = {'n_estimators': list(range(20, 210, 10)),
+                       'learning_rate': [0.001, 0.01, 0.1, 0.5, 1.0, 5.0, 10., 20., 50., 100.]}
+    MI_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(7, 31, 1)),
+                       'activation': ['logistic', 'tanh', 'relu'],
+                       'solver': ['lbfgs', 'sgd', 'adam'],
+                       'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
+                       'max_iter': list(range(700, 1600, 100))}
+
+
+    SVM_RF_GRID_CLS = {'n_estimators': list(range(20, 160, 10)),
+                       'criterion': ["gini", "entropy"]}
+    SVM_SVM_GRID_CLS = {'C': [0.01, 0.05, 0.1, 0.5, 1.0, 5.0, 10.0, 20.],
+                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']}
+    SVM_LR_GRID_CLS = {'C': [0.01, 0.05, 0.1, 1.0, 2.0, 5.0, 10.0, 20.0],
+                       'max_iter': list(range(700, 1600, 100))}
+    SVM_KNN_GRID_CLS = {'n_neighbors': list(range(5, 30, 1)),
+                       'weights': ['uniform', 'distance']}
+    SVM_DT_GRID_CLS = {'criterion': ["gini", "entropy", "log_loss"],
+                       'splitter': ['best', 'random'],
+                       'max_features': {"auto", "sqrt", "log2"}}
+    SVM_AdaBoost_GRID_CLS = {'n_estimators': list(range(10, 160, 10)),
+                       'learning_rate': [0.001, 0.01, 0.1, 0.5, 1.0, 5.0, 10., 20., 50., 100.]}
+    SVM_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(5, 26, 1)),
+                       'activation': ['logistic', 'tanh', 'relu'],
+                       'solver': ['lbfgs', 'sgd', 'adam'],
+                       'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
+                       'max_iter': list(range(700, 1600, 100))}
+
+
+    RF_RF_GRID_CLS = {'n_estimators': list(range(10, 110, 10)),
+                       'criterion': ["gini", "entropy"]}
+    RF_SVM_GRID_CLS = {'C': [0.01, 0.025, 0.05, 0.1, 0.5, 1.0, 2.0, 5.0],
+                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']}
+    RF_LR_GRID_CLS = {'C': [0.01, 0.025, 0.05, 0.1, 0.5, 1.0, 2.0, 5.0],
+                       'max_iter': list(range(700, 1600, 100))}
+    RF_KNN_GRID_CLS = {'n_neighbors': list(range(3, 21, 1)),
+                       'weights': ['uniform', 'distance']}
+    RF_DT_GRID_CLS = {'criterion': ["gini", "entropy", "log_loss"],
+                       'splitter': ['best', 'random'],
+                       'max_features': {"auto", "sqrt", "log2"}}
+    RF_AdaBoost_GRID_CLS = {'n_estimators': list(range(10, 110, 10)),
+                       'learning_rate': [0.001, 0.01, 0.1, 0.5, 1.0, 2.5, 5.0, 10.0, 20.]}
+    RF_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(3, 21, 1)),
+                       'activation': ['logistic', 'tanh', 'relu'],
+                       'solver': ['lbfgs', 'sgd', 'adam'],
+                       'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
+                       'max_iter': list(range(700, 1600, 100))}
+
+
+    MCFS_RF_GRID_CLS = {'n_estimators': list(range(10, 105, 5)),
+                      'criterion': ["gini", "entropy"]}
+    MCFS_SVM_GRID_CLS = {'C': [0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.0, 5.0, 10.0],
+                       'kernel': ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']}
+    MCFS_LR_GRID_CLS = {'C': [0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.0, 5.0, 10.0],
+                      'max_iter': list(range(700, 1600, 100))}
+    MCFS_KNN_GRID_CLS = {'n_neighbors': list(range(3, 26, 1)),
+                       'weights': ['uniform', 'distance']}
+    MCFS_DT_GRID_CLS = {'criterion': ["gini", "entropy", "log_loss"],
+                      'splitter': ['best', 'random'],
+                      'max_features': {"auto", "sqrt", "log2"}}
+    MCFS_AdaBoost_GRID_CLS = {'n_estimators': list(range(10, 110, 5)),
+                            'learning_rate': [0.001, 0.01, 0.1, 0.5, 1.0, 2.5, 5.0, 10.0, 20.]}
+    MCFS_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(3, 21, 1)),
+                       'activation': ['logistic', 'tanh', 'relu'],
+                       'solver': ['lbfgs', 'sgd', 'adam'],
+                       'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
+                       'max_iter': list(range(700, 1600, 100))}

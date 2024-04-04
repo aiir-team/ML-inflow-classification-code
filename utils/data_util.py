@@ -199,6 +199,10 @@ def divide_dataset_regression(X, y, test_size=0.2):
     return x_train, x_test, y_train, y_test, idx
 
 
+def divide_dataset_classification(X, y, test_size=0.2):
+    return train_test_split(X, y, test_size=test_size, random_state=Config.SEED, shuffle=True, stratify=y)
+
+
 def scale_dataset_regression(X_train, X_test, y_train, y_test, scaler="std"):
     if scaler == "std":
         scaler_X = StandardScaler()
@@ -215,6 +219,18 @@ def scale_dataset_regression(X_train, X_test, y_train, y_test, scaler="std"):
     y_train = scaler_y.transform(y_train.reshape(-1, 1))
     y_test = scaler_y.transform(y_test.reshape(-1, 1))
     return x_train, x_test, y_train, y_test, scaler_X, scaler_y
+
+
+def scale_dataset_classification(X_train, X_test, y_train, y_test, scaler="std"):
+    if scaler == "std":
+        scaler_X = StandardScaler()
+        scaler_X.fit(X_train)
+    else:
+        scaler_X = MinMaxScaler()
+        scaler_X.fit(X_train)
+    x_train = scaler_X.transform(X_train)
+    x_test = scaler_X.transform(X_test)
+    return x_train, x_test, y_train, y_test, scaler_X, None
 
 
 def split_dataset_regression(X, y, scaler="std"):
