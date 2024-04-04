@@ -19,37 +19,75 @@ from sklearn.preprocessing import LabelEncoder
 from utils.data_util import convert_to_classification, divide_dataset_regression, scale_dataset_regression
 from utils.result_util import save_classification_results, save_regression_results
 from config import Config, Const
-from utils.feature_util import select_reg_features
+from utils.feature_util import select_reg_features, select_cls_features
 
 
-data = pd.read_csv("data/input_data/inflow_by_mean.csv")
-X = data[['value-1', 'value-2', 'value-3', 'value-4', 'value-5', 'value-6', 'value-7',
-          'value-8', 'value-9', 'value-10', 'value-11', 'value-12']].values
-y = data[["value", "month"]].values
+def check_regression_features():
+    data = pd.read_csv("data/input_data/inflow_by_mean.csv")
+    X = data[['value-1', 'value-2', 'value-3', 'value-4', 'value-5', 'value-6', 'value-7',
+              'value-8', 'value-9', 'value-10', 'value-11', 'value-12']].values
+    y = data[["value", "month"]].values
 
-## Divide dataset
-x_train, x_test, y_train, y_test, index_test = divide_dataset_regression(X, y[:,0], test_size=Config.TEST_SIZE)
+    ## Divide dataset
+    x_train, x_test, y_train, y_test, index_test = divide_dataset_regression(X, y[:,0], test_size=Config.TEST_SIZE)
 
-## Select features
-selected_features_idx, selected_features_score = select_reg_features(x_train, y_train, mi_weight=1, anova_weight=0, dt_weight=0, rf_weight=0, svm_weight=0)
-print(selected_features_idx)
-print(selected_features_score)
-print(selected_features_idx[selected_features_score>Config.FS_THRESHOLD])
-
-
-selected_features_idx, selected_features_score = select_reg_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=1, svm_weight=0)
-print(selected_features_idx)
-print(selected_features_score)
-print(selected_features_idx[selected_features_score>Config.FS_THRESHOLD])
+    ## Select features
+    selected_features_idx, selected_features_score = select_reg_features(x_train, y_train, mi_weight=1, anova_weight=0, dt_weight=0, rf_weight=0, svm_weight=0)
+    print(selected_features_idx)
+    print(selected_features_score)
+    print(selected_features_idx[selected_features_score>Config.FS_REG_THRESHOLD])
 
 
-selected_features_idx, selected_features_score = select_reg_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=0, svm_weight=1)
-print(selected_features_idx)
-print(selected_features_score)
-print(selected_features_idx[selected_features_score>Config.FS_THRESHOLD])
+    selected_features_idx, selected_features_score = select_reg_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=1, svm_weight=0)
+    print(selected_features_idx)
+    print(selected_features_score)
+    print(selected_features_idx[selected_features_score>Config.FS_REG_THRESHOLD])
 
 
-selected_features_idx, selected_features_score = select_reg_features(x_train, y_train, mi_weight=0.33, anova_weight=0, dt_weight=0, rf_weight=0.33, svm_weight=0.33)
-print(selected_features_idx)
-print(selected_features_score)
-print(selected_features_idx[selected_features_score>Config.FS_THRESHOLD])
+    selected_features_idx, selected_features_score = select_reg_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=0, svm_weight=1)
+    print(selected_features_idx)
+    print(selected_features_score)
+    print(selected_features_idx[selected_features_score>Config.FS_REG_THRESHOLD])
+
+
+    selected_features_idx, selected_features_score = select_reg_features(x_train, y_train, mi_weight=0.33, anova_weight=0, dt_weight=0, rf_weight=0.33, svm_weight=0.33)
+    print(selected_features_idx)
+    print(selected_features_score)
+    print(selected_features_idx[selected_features_score>Config.FS_REG_THRESHOLD])
+
+
+def check_classification_features():
+    data = pd.read_csv("data/input_data/inflow_by_mean.csv")
+    X = data[['value-1', 'value-2', 'value-3', 'value-4', 'value-5', 'value-6', 'value-7',
+              'value-8', 'value-9', 'value-10', 'value-11', 'value-12']].values
+    y = data[["label", "month"]].values
+    lb_encoder = LabelEncoder()
+    y_out = lb_encoder.fit_transform(y[:, 0])
+
+    ## Divide dataset
+    x_train, x_test, y_train, y_test, index_test = divide_dataset_regression(X, y_out, test_size=Config.TEST_SIZE)
+
+    ## Select features
+    selected_features_idx, selected_features_score = select_cls_features(x_train, y_train, mi_weight=1, anova_weight=0, dt_weight=0, rf_weight=0, svm_weight=0)
+    print(selected_features_idx)
+    print(selected_features_score)
+    print(selected_features_idx[selected_features_score > Config.FS_CLS_THRESHOLD])
+
+    selected_features_idx, selected_features_score = select_cls_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=0, svm_weight=1)
+    print(selected_features_idx)
+    print(selected_features_score)
+    print(selected_features_idx[selected_features_score > Config.FS_CLS_THRESHOLD])
+
+    selected_features_idx, selected_features_score = select_cls_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=1, svm_weight=0)
+    print(selected_features_idx)
+    print(selected_features_score)
+    print(selected_features_idx[selected_features_score > Config.FS_CLS_THRESHOLD])
+
+    selected_features_idx, selected_features_score = select_cls_features(x_train, y_train, mi_weight=0.33, anova_weight=0, dt_weight=0, rf_weight=0.33, svm_weight=0.33)
+    print(selected_features_idx)
+    print(selected_features_score)
+    print(selected_features_idx[selected_features_score > Config.FS_CLS_THRESHOLD])
+
+
+# check_regression_features()
+check_classification_features()

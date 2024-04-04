@@ -33,8 +33,8 @@ x_train, x_test, y_train, y_test, index_test = divide_dataset_regression(X, y[:,
 ## Select features
 key_features = "RFSelector"
 selected_features_idx, selected_features_score = select_reg_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=1, svm_weight=0)
-X_train = x_train[:, selected_features_idx[selected_features_score>Config.FS_THRESHOLD]]
-X_test = x_test[:, selected_features_idx[selected_features_score>Config.FS_THRESHOLD]]
+X_train = x_train[:, selected_features_idx[selected_features_score>Config.FS_REG_THRESHOLD]]
+X_test = x_test[:, selected_features_idx[selected_features_score>Config.FS_REG_THRESHOLD]]
 print(selected_features_idx)
 print(selected_features_score)
 

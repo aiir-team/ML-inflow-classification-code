@@ -124,7 +124,8 @@ class Config:
     SEED = 20
     VERBOSE = False
     N_TRIALS = 10                # Number of trials for each model
-    FS_THRESHOLD = 0.2
+    FS_REG_THRESHOLD = 0.2
+    FS_CLS_THRESHOLD = 0.35
 
     # Identify feature and response variable(s) and values must be numeric and numpy arrays
     NAME_DATASET = "data/input_data/inflow_by_mean.csv"
