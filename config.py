@@ -238,7 +238,7 @@ class Config:
                        'weights': ['uniform', 'distance']}
     MI_DT_GRID_CLS = {'criterion': ["gini", "entropy"],
                        'splitter': ['best', 'random'],
-                       'max_features': {"auto", "sqrt", "log2"}}
+                       'max_features': ["auto", "sqrt", "log2"]}
     MI_AdaBoost_GRID_CLS = {'n_estimators': list(range(20, 210, 10)),
                        'learning_rate': [0.001, 0.01, 0.1, 0.5, 1.0, 5.0, 10., 20., 50., 100.]}
     MI_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(7, 31, 1)),
@@ -258,7 +258,7 @@ class Config:
                        'weights': ['uniform', 'distance']}
     SVM_DT_GRID_CLS = {'criterion': ["gini", "entropy"],
                        'splitter': ['best', 'random'],
-                       'max_features': {"auto", "sqrt", "log2"}}
+                       'max_features': ["auto", "sqrt", "log2"]}
     SVM_AdaBoost_GRID_CLS = {'n_estimators': list(range(10, 160, 10)),
                        'learning_rate': [0.001, 0.01, 0.1, 0.5, 1.0, 5.0, 10., 20., 50., 100.]}
     SVM_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(5, 26, 1)),
@@ -278,7 +278,7 @@ class Config:
                        'weights': ['uniform', 'distance']}
     RF_DT_GRID_CLS = {'criterion': ["gini", "entropy"],
                        'splitter': ['best', 'random'],
-                       'max_features': {"auto", "sqrt", "log2"}}
+                       'max_features': ["auto", "sqrt", "log2"]}
     RF_AdaBoost_GRID_CLS = {'n_estimators': list(range(10, 110, 10)),
                        'learning_rate': [0.001, 0.01, 0.1, 0.5, 1.0, 2.5, 5.0, 10.0, 20.]}
     RF_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(3, 21, 1)),
@@ -298,7 +298,7 @@ class Config:
                        'weights': ['uniform', 'distance']}
     MCFS_DT_GRID_CLS = {'criterion': ["gini", "entropy"],
                       'splitter': ['best', 'random'],
-                      'max_features': {"auto", "sqrt", "log2"}}
+                      'max_features': ["auto", "sqrt", "log2"]}
     MCFS_AdaBoost_GRID_CLS = {'n_estimators': list(range(10, 110, 5)),
                             'learning_rate': [0.001, 0.01, 0.1, 0.5, 1.0, 2.5, 5.0, 10.0, 20.]}
     MCFS_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(3, 21, 1)),
