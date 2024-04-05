@@ -76,7 +76,7 @@ list_models = [
 ]
 
 for idx_model, model in enumerate(list_models):
-    grid = GridSearchCV(model['model'], model['param_grid'], refit=True, verbose=0, n_jobs=8, scoring="f1")
+    grid = GridSearchCV(model['model'], model['param_grid'], refit=True, verbose=0, n_jobs=8, scoring="f1_macro")
     grid.fit(x_train, y_train)
     mm0 = {
         "features": key_features,
