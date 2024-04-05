@@ -231,7 +231,7 @@ class Config:
     MI_RF_GRID_CLS = {'n_estimators': list(range(20, 220, 20)),
                        'criterion': ["gini", "entropy"]}
     MI_SVM_GRID_CLS = {'C': [0.1, 0.5, 1.0, 10.0, 100.0],
-                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']}
+                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
     MI_LR_GRID_CLS = {'C': [0.01, 0.1, 1.0, 10, 100],
                        'max_iter': list(range(700, 1600, 100))}
     MI_KNN_GRID_CLS = {'n_neighbors': list(range(5, 30, 1)),
@@ -251,7 +251,7 @@ class Config:
     SVM_RF_GRID_CLS = {'n_estimators': list(range(20, 160, 10)),
                        'criterion': ["gini", "entropy"]}
     SVM_SVM_GRID_CLS = {'C': [0.01, 0.05, 0.1, 0.5, 1.0, 5.0, 10.0, 20.],
-                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']}
+                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
     SVM_LR_GRID_CLS = {'C': [0.01, 0.05, 0.1, 1.0, 2.0, 5.0, 10.0, 20.0],
                        'max_iter': list(range(700, 1600, 100))}
     SVM_KNN_GRID_CLS = {'n_neighbors': list(range(5, 30, 1)),
@@ -271,7 +271,7 @@ class Config:
     RF_RF_GRID_CLS = {'n_estimators': list(range(10, 110, 10)),
                        'criterion': ["gini", "entropy"]}
     RF_SVM_GRID_CLS = {'C': [0.01, 0.025, 0.05, 0.1, 0.5, 1.0, 2.0, 5.0],
-                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']}
+                  'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
     RF_LR_GRID_CLS = {'C': [0.01, 0.025, 0.05, 0.1, 0.5, 1.0, 2.0, 5.0],
                        'max_iter': list(range(700, 1600, 100))}
     RF_KNN_GRID_CLS = {'n_neighbors': list(range(3, 21, 1)),
@@ -291,7 +291,7 @@ class Config:
     MCFS_RF_GRID_CLS = {'n_estimators': list(range(10, 105, 5)),
                       'criterion': ["gini", "entropy"]}
     MCFS_SVM_GRID_CLS = {'C': [0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.0, 5.0, 10.0],
-                       'kernel': ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']}
+                       'kernel': ['linear', 'poly', 'rbf', 'sigmoid']}
     MCFS_LR_GRID_CLS = {'C': [0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.0, 5.0, 10.0],
                       'max_iter': list(range(700, 1600, 100))}
     MCFS_KNN_GRID_CLS = {'n_neighbors': list(range(3, 26, 1)),
