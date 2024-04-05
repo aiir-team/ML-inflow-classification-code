@@ -236,7 +236,7 @@ class Config:
                        'max_iter': list(range(700, 1600, 100))}
     MI_KNN_GRID_CLS = {'n_neighbors': list(range(5, 30, 1)),
                        'weights': ['uniform', 'distance']}
-    MI_DT_GRID_CLS = {'criterion': ["gini", "entropy", "log_loss"],
+    MI_DT_GRID_CLS = {'criterion': ["gini", "entropy"],
                        'splitter': ['best', 'random'],
                        'max_features': {"auto", "sqrt", "log2"}}
     MI_AdaBoost_GRID_CLS = {'n_estimators': list(range(20, 210, 10)),
@@ -256,7 +256,7 @@ class Config:
                        'max_iter': list(range(700, 1600, 100))}
     SVM_KNN_GRID_CLS = {'n_neighbors': list(range(5, 30, 1)),
                        'weights': ['uniform', 'distance']}
-    SVM_DT_GRID_CLS = {'criterion': ["gini", "entropy", "log_loss"],
+    SVM_DT_GRID_CLS = {'criterion': ["gini", "entropy"],
                        'splitter': ['best', 'random'],
                        'max_features': {"auto", "sqrt", "log2"}}
     SVM_AdaBoost_GRID_CLS = {'n_estimators': list(range(10, 160, 10)),
@@ -276,7 +276,7 @@ class Config:
                        'max_iter': list(range(700, 1600, 100))}
     RF_KNN_GRID_CLS = {'n_neighbors': list(range(3, 21, 1)),
                        'weights': ['uniform', 'distance']}
-    RF_DT_GRID_CLS = {'criterion': ["gini", "entropy", "log_loss"],
+    RF_DT_GRID_CLS = {'criterion': ["gini", "entropy"],
                        'splitter': ['best', 'random'],
                        'max_features': {"auto", "sqrt", "log2"}}
     RF_AdaBoost_GRID_CLS = {'n_estimators': list(range(10, 110, 10)),
@@ -296,7 +296,7 @@ class Config:
                       'max_iter': list(range(700, 1600, 100))}
     MCFS_KNN_GRID_CLS = {'n_neighbors': list(range(3, 26, 1)),
                        'weights': ['uniform', 'distance']}
-    MCFS_DT_GRID_CLS = {'criterion': ["gini", "entropy", "log_loss"],
+    MCFS_DT_GRID_CLS = {'criterion': ["gini", "entropy"],
                       'splitter': ['best', 'random'],
                       'max_features': {"auto", "sqrt", "log2"}}
     MCFS_AdaBoost_GRID_CLS = {'n_estimators': list(range(10, 110, 5)),
