@@ -63,9 +63,9 @@ def save_classification_results(results: dict, validation:True, metrics_head:dic
                  test_filename: str, pathsave: str, name_labels=None,
                  name_model=None, n_labels=2, loss_train=None, system=None, verbose=False, draw_auc=True):
     ## Calculate performance metrics and save it to csv file
-    matrix_conf_train, mm1 = my_classify_metrics(results[Const.Y_TRAIN_TRUE_UNSCALED], results[Const.Y_TRAIN_PRED_UNSCALED],
+    matrix_conf_train, mm1 = my_classify_metrics(results[Const.Y_TRAIN_TRUE_SCALED], results[Const.Y_TRAIN_PRED_SCALED],
                               results[Const.Y_TRAIN_PRED_PROB], prefix="train")
-    matrix_conf_test, mm2 = my_classify_metrics(results[Const.Y_TEST_TRUE_UNSCALED], results[Const.Y_TEST_PRED_UNSCALED],
+    matrix_conf_test, mm2 = my_classify_metrics(results[Const.Y_TEST_TRUE_SCALED], results[Const.Y_TEST_PRED_SCALED],
                               results[Const.Y_TEST_PRED_PROB], prefix="test")
     if validation:
         matrix_conf_valid, mm3 = my_classify_metrics(results[Const.Y_VALID_TRUE_UNSCALED], results[Const.Y_VALID_PRED_UNSCALED],
