@@ -30,19 +30,21 @@ y_clean = lb_encoder.fit_transform(y_raw[:, 0])
 ## Divide dataset
 x_train, x_test, y_train, y_test = divide_dataset_classification(X, y_clean, test_size=Config.TEST_SIZE)
 
+## Scale dataset
+X_train_scaled, X_test_scaled, y_train, y_test, scaler_X, _ = scale_dataset_classification(x_train, x_test, y_train, y_test,
+                                                                                                         scaler="std", fix_imbalanced=True)
+
 ## Select features
-key_features = "MISelector"
-selected_features_idx, selected_features_score = select_cls_features(x_train, y_train, mi_weight=1, anova_weight=0, dt_weight=0, rf_weight=0, svm_weight=0)
-X_train = x_train[:, selected_features_idx[selected_features_score>Config.FS_CLS_THRESHOLD]]
-X_test = x_test[:, selected_features_idx[selected_features_score>Config.FS_CLS_THRESHOLD]]
+# 0.6 - 1, 12, 5, 11, 6, 10, 7
+key_features = "MI-FS"
+selected_features_idx, selected_features_score = select_cls_features(X_train_scaled, y_train, mi_weight=1, anova_weight=0, dt_weight=0, rf_weight=0,
+                                                                     svm_weight=0)
+X_train_scaled = X_train_scaled[:, selected_features_idx[selected_features_score>0.6]]
+X_test_scaled = X_test_scaled[:, selected_features_idx[selected_features_score>0.6]]
 print(selected_features_idx)
 print(selected_features_score)
 
-## Scale dataset
-X_train_scaled, X_test_scaled, y_train_scaled, y_test_scaled, scaler_X, _ = scale_dataset_classification(X_train, X_test, y_train, y_test, scaler="std", fix_imbalanced=True)
-
 ## Build models
-
 list_models = [
     {
         "name": "RF",
@@ -77,15 +79,15 @@ list_models = [
 
 for idx_model, model in enumerate(list_models):
     grid = GridSearchCV(model['model'], model['param_grid'], refit=True, verbose=0, n_jobs=8, scoring="f1_macro")
-    grid.fit(x_train, y_train)
+    grid.fit(X_train_scaled, y_train)
     mm0 = {
         "features": key_features,
         "model": model['name'],
         "best_params": grid.best_params_,
         "best_estimator": grid.best_estimator_
     }
-    y_train_pred = grid.predict(x_train)
-    y_test_pred = grid.predict(x_test)
+    y_train_pred = grid.predict(X_train_scaled)
+    y_test_pred = grid.predict(X_test_scaled)
     results = {
         Const.Y_TRAIN_TRUE_SCALED: y_train,  # 0 and 1
         Const.Y_TRAIN_TRUE_UNSCALED: lb_encoder.inverse_transform(y_train),  # categorical string
@@ -97,8 +99,8 @@ for idx_model, model in enumerate(list_models):
         Const.Y_TEST_PRED_SCALED: y_test_pred,
         Const.Y_TEST_PRED_UNSCALED: lb_encoder.inverse_transform(y_test_pred),
 
-        Const.Y_TRAIN_PRED_PROB: grid.predict_proba(x_train),
-        Const.Y_TEST_PRED_PROB: grid.predict_proba(x_test),
+        Const.Y_TRAIN_PRED_PROB: grid.predict_proba(X_train_scaled),
+        Const.Y_TEST_PRED_PROB: grid.predict_proba(X_test_scaled),
     }
     save_classification_results(results=results, validation=Config.VALIDATION_USED, metrics_head=mm0, metrics_file="metrics-results-cls",
                                 test_filename=f"{model['name']}",

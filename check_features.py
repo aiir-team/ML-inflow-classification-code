@@ -124,21 +124,25 @@ def check_classification_smote_features():
                                                                                                              scaler="std", fix_imbalanced=True)
 
     ## Select features
+    # 0.6 - 1, 12, 5, 11, 6, 10, 7
     selected_features_idx, selected_features_score = select_cls_features(X_train_scaled, y_train_scaled, mi_weight=1, anova_weight=0, dt_weight=0, rf_weight=0, svm_weight=0)
     print(selected_features_idx)
     print(selected_features_score)
     print(selected_features_idx[selected_features_score > Config.FS_CLS_THRESHOLD_SMOTE])
 
+    # 0.5 - 8, 10, 7, 1
     selected_features_idx, selected_features_score = select_cls_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=0, svm_weight=1)
     print(selected_features_idx)
     print(selected_features_score)
     print(selected_features_idx[selected_features_score > Config.FS_CLS_THRESHOLD_SMOTE])
 
+    # 0.4 - 1, 6
     selected_features_idx, selected_features_score = select_cls_features(x_train, y_train, mi_weight=0, anova_weight=0, dt_weight=0, rf_weight=1, svm_weight=0)
     print(selected_features_idx)
     print(selected_features_score)
     print(selected_features_idx[selected_features_score > Config.FS_CLS_THRESHOLD_SMOTE])
 
+    # 0.4 - 1, 3
     selected_features_idx, selected_features_score = select_cls_features(x_train, y_train, mi_weight=0.33, anova_weight=0, dt_weight=0, rf_weight=0.33, svm_weight=0.33)
     print(selected_features_idx)
     print(selected_features_score)
@@ -148,5 +152,5 @@ def check_classification_smote_features():
 
 
 # check_regression_features()
-check_classification_features()
-# check_classification_smote_features()
+# check_classification_features()
+check_classification_smote_features()
