@@ -107,7 +107,7 @@ class Config:
     DATA_RESULTS_ALL = f'{DATA_DIRECTORY}/results_final_02'
 
     DATA_RESULTS_CLS = f'{DATA_DIRECTORY}/results_cls_final'
-    DATA_RESULTS_CLS_SMOTE = f'{DATA_DIRECTORY}/results_cls_smote_final'
+    DATA_RESULTS_CLS_SMOTE = f'{DATA_DIRECTORY}/results_cls_smote_final-damn'
 
     FILE_METRIC_NAME = "metrics-results"
     FILE_METRIC_CSV_HEADER = ["model_paras", ] + FILE_METRIC_CSV
@@ -129,6 +129,7 @@ class Config:
     N_TRIALS = 10                # Number of trials for each model
     FS_REG_THRESHOLD = 0.2
     FS_CLS_THRESHOLD = 0.35
+    FS_CLS_THRESHOLD_SMOTE = 0.6
 
     # Identify feature and response variable(s) and values must be numeric and numpy arrays
     NAME_DATASET = "data/input_data/inflow_by_mean.csv"
@@ -241,7 +242,7 @@ class Config:
                        'max_features': ["auto", "sqrt", "log2"]}
     MI_AdaBoost_GRID_CLS = {'n_estimators': list(range(20, 210, 10)),
                        'learning_rate': [0.001, 0.01, 0.1, 0.5, 1.0, 5.0, 10., 20., 50., 100.]}
-    MI_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(7, 31, 1)),
+    MI_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(8, 21, 1)),
                        'activation': ['logistic', 'tanh', 'relu'],
                        'solver': ['lbfgs', 'sgd', 'adam'],
                        'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
@@ -261,7 +262,7 @@ class Config:
                        'max_features': ["auto", "sqrt", "log2"]}
     SVM_AdaBoost_GRID_CLS = {'n_estimators': list(range(10, 160, 10)),
                        'learning_rate': [0.001, 0.01, 0.1, 0.5, 1.0, 5.0, 10., 20., 50., 100.]}
-    SVM_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(5, 26, 1)),
+    SVM_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(6, 15, 1)),
                        'activation': ['logistic', 'tanh', 'relu'],
                        'solver': ['lbfgs', 'sgd', 'adam'],
                        'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
@@ -281,7 +282,7 @@ class Config:
                        'max_features': ["auto", "sqrt", "log2"]}
     RF_AdaBoost_GRID_CLS = {'n_estimators': list(range(10, 110, 10)),
                        'learning_rate': [0.001, 0.01, 0.1, 0.5, 1.0, 2.5, 5.0, 10.0, 20.]}
-    RF_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(3, 21, 1)),
+    RF_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(3, 10, 1)),
                        'activation': ['logistic', 'tanh', 'relu'],
                        'solver': ['lbfgs', 'sgd', 'adam'],
                        'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
@@ -301,7 +302,7 @@ class Config:
                       'max_features': ["auto", "sqrt", "log2"]}
     MCFS_AdaBoost_GRID_CLS = {'n_estimators': list(range(10, 110, 5)),
                             'learning_rate': [0.001, 0.01, 0.1, 0.5, 1.0, 2.5, 5.0, 10.0, 20.]}
-    MCFS_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(3, 21, 1)),
+    MCFS_MLP_GRID_CLS = {'hidden_layer_sizes': list(range(5, 15, 1)),
                        'activation': ['logistic', 'tanh', 'relu'],
                        'solver': ['lbfgs', 'sgd', 'adam'],
                        'alpha': [0.00001, 0.0001, 0.001, 0.01, 0.1],
